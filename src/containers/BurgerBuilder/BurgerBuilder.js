@@ -113,6 +113,18 @@ class BurgerBuilder extends Component {
        .catch(error => {
          this.setState({loading: false, purchasing: false})
        });
+
+    const queryparams = [];
+    for(let i in this.state.ingredients){
+      queryparams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+    }
+
+    const queryString = queryparams.join('&');
+
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString
+    });
   };
 
   render () {
